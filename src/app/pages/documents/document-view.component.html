@@ -1,0 +1,80 @@
+<div class="space-y-6">
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+    <button 
+      (click)="goBack()"
+      class="flex items-center text-gray-600 hover:text-gray-900">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Retour aux documents
+    </button>
+    
+    @if (document) {
+      <div class="flex space-x-2">
+        <button 
+          (click)="onEdit()"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+          Modifier
+        </button>
+        <button 
+          (click)="onDelete()"
+          class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+          Supprimer
+        </button>
+      </div>
+    }
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading) {
+    <div class="flex items-center justify-center py-12">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+    </div>
+  } @else if (error) {
+    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+      {{ error }}
+    </div>
+  } @else if (document) {
+    <!-- Document Content -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div class="border-b border-gray-200 pb-4 mb-4">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ document.title }}</h1>
+        
+        <div class="flex items-center space-x-4 text-sm text-gray-500">
+          <span>{{ document.author }}</span>
+          <span>•</span>
+          <span>Créé le {{ document.created | date:'shortDate' }}</span>
+          @if (document.updated) {
+            <span>•</span>
+            <span>Modifié le {{ document.updated | date:'shortDate' }}</span>
+          }
+        </div>
+        
+        <div class="flex items-center space-x-4 mt-3">
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            {{ document.type.toUpperCase() }}
+          </span>
+          <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+            {{ document.status }}
+          </span>
+          <span class="text-sm text-gray-500">{{ (document.size / 1024).toFixed(2) }} KB</span>
+        </div>
+        
+        @if (document.tags.length > 0) {
+          <div class="flex flex-wrap gap-2 mt-3">
+            @for (tag of document.tags; track tag) {
+              <span class="inline-flex items-center px-2 py-1 rounded-md text-xs bg-gray-100 text-gray-700">
+                #{{ tag }}
+              </span>
+            }
+          </div>
+        }
+      </div>
+      
+      <div class="prose max-w-none">
+        <p class="text-gray-700 leading-relaxed">{{ document.content }}</p>
+      </div>
+    </div>
+  }
+</div>

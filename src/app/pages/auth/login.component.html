@@ -1,0 +1,112 @@
+<div class="min-h-screen bg-background-light dark:bg-background-dark text-wood-brown dark:text-background-light flex items-center justify-center p-6 relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 wood-texture-overlay pointer-events-none"></div>
+  <div class="absolute top-[-10%] left-[-5%] w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-[-10%] right-[-5%] w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+
+  <div class="w-full max-w-md relative z-10">
+    <!-- Logo Section -->
+    <div class="flex flex-col items-center mb-8">
+      <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-xl size-16 mb-4 shadow-xl ring-4 ring-white dark:ring-wood-brown" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDVfiyCoO6_-jSRiZhX9uxdWR3kzqkTO7tyu7uTISICWtnZv5iYQ-80MnDUH_qevz5_M_SffURiXVNBsgSveVxrH1VuvCSDCBf1g_lEWxEK6ax5d-viMFI9RK2x4S8TThjAYEP2IEAj9Od2vfPEtu_MDWFNq_SYeODhAAheSfQDGhsMIHh8fWnYLW45Qi0ejPZpMrZ5LPKYV9YFibsXIGeOnSE9iApI-w_micvegCypO8s2Cd-solNQQth3mvhPV9vytL4CL6cpGIID");'></div>
+      <h1 class="text-wood-brown dark:text-white text-2xl font-extrabold tracking-tight">DocuWood</h1>
+      <p class="text-soft-brown text-sm">Gestion & Génération de Documents</p>
+    </div>
+
+    <!-- Login Card -->
+    <div class="bg-white/80 dark:bg-wood-brown/40 backdrop-blur-xl rounded-2xl p-8 border border-warm-beige dark:border-wood-brown/20 shadow-2xl">
+      <div class="mb-8">
+        <h2 class="text-xl font-bold text-wood-brown dark:text-white">Connexion à l'Espace Client</h2>
+        <p class="text-soft-brown text-sm mt-1">Heureux de vous revoir parmi nous.</p>
+      </div>
+      
+      <form class="space-y-6" (ngSubmit)="onSubmit()">
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-soft-brown uppercase tracking-wider ml-1" for="email">Email</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <span class="material-symbols-outlined text-soft-brown text-[20px]">mail</span>
+            </div>
+            <input 
+              id="email"
+              name="email"
+              type="email"
+              [(ngModel)]="email"
+              required
+              class="block w-full pl-10 pr-4 py-3 border border-warm-beige dark:border-wood-brown/30 bg-warm-beige/30 dark:bg-wood-brown/20 rounded-xl text-sm placeholder-soft-brown/60 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+              placeholder="votre@email.fr">
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex justify-between items-center px-1">
+            <label class="text-xs font-bold text-soft-brown uppercase tracking-wider" for="password">Mot de passe</label>
+            <a class="text-[11px] font-bold text-primary hover:underline transition-all" href="#">Mot de passe oublié ?</a>
+          </div>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <span class="material-symbols-outlined text-soft-brown text-[20px]">lock</span>
+            </div>
+            <input 
+              id="password"
+              name="password"
+              type="password"
+              [(ngModel)]="password"
+              required
+              class="block w-full pl-10 pr-4 py-3 border border-warm-beige dark:border-wood-brown/30 bg-warm-beige/30 dark:bg-wood-brown/20 rounded-xl text-sm placeholder-soft-brown/60 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+              placeholder="•••••••••">
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 px-1">
+          <input 
+            id="remember" 
+            name="remember" 
+            type="checkbox" 
+            [(ngModel)]="rememberMe"
+            class="w-4 h-4 rounded text-primary focus:ring-primary border-warm-beige bg-warm-beige/30">
+          <label class="text-sm text-soft-brown cursor-pointer" for="remember">Se souvenir de moi</label>
+        </div>
+
+        @if (errorMessage) {
+          <div class="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl text-sm">
+            {{ errorMessage }}
+          </div>
+        }
+
+        <button 
+          type="submit"
+          [disabled]="isLoading"
+          class="w-full h-12 bg-accent-yellow hover:bg-yellow-500 text-wood-brown font-extrabold rounded-xl shadow-lg shadow-accent-yellow/20 flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed">
+          @if (isLoading) {
+            <div class="w-5 h-5 border-2 border-wood-brown/20 border-t-wood-brown rounded-full animate-spin"></div>
+            <span>Connexion en cours...</span>
+          } @else {
+            <span>Se connecter</span>
+            <span class="material-symbols-outlined text-[20px]">login</span>
+          }
+        </button>
+      </form>
+
+      <div class="mt-8 pt-6 border-t border-warm-beige dark:border-wood-brown/20 text-center">
+        <p class="text-sm text-soft-brown">
+          Pas encore de compte ? 
+          <button (click)="goToRegister()" class="text-primary font-bold hover:underline">
+            S'inscrire
+          </button>
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a class="inline-flex items-center gap-2 text-xs font-medium text-soft-brown hover:text-wood-brown dark:hover:text-white transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">help_outline</span>
+        Besoin d'aide ou support technique ?
+      </a>
+    </div>
+
+    <!-- Demo Info -->
+    <div class="mt-6 text-center text-xs text-soft-brown/40">
+      <p>Demo: user@example.com / password</p>
+    </div>
+  </div>
+</div>

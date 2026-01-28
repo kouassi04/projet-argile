@@ -1,0 +1,202 @@
+<div class="space-y-8">
+  <!-- Header -->
+  <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-6 lg:space-y-0">
+    <div>
+      <h1 class="text-4xl font-bold text-wood-brown dark:text-white mb-2">Tableau de bord</h1>
+      <p class="text-soft-brown dark:text-soft-brown/60 text-lg">Vue d'ensemble de votre écosystème documentaire</p>
+    </div>
+    
+    <div class="flex space-x-4">
+      <button class="btn-primary px-6 py-3 rounded-xl font-medium shadow-sm">
+        <span class="material-symbols-outlined text-lg mr-2">assessment</span>
+        Rapport complet
+      </button>
+      <button class="btn-secondary px-6 py-3 rounded-xl font-medium">
+        <span class="material-symbols-outlined text-lg mr-2">settings</span>
+        Paramètres
+      </button>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="flex items-center justify-center py-20">
+      <div class="relative">
+        <div class="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+      </div>
+    </div>
+  } @else if (stats) {
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="card-wood p-6 hover:shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined text-2xl text-primary">description</span>
+          </div>
+          <div class="flex items-center space-x-1 text-green-600">
+            <span class="text-sm font-medium">+12%</span>
+            <span class="material-symbols-outlined text-sm">trending_up</span>
+          </div>
+        </div>
+        <h3 class="text-soft-brown dark:text-soft-brown/60 text-sm mb-1">Documents</h3>
+        <p class="text-3xl font-bold text-wood-brown dark:text-white">{{ stats.totalDocuments }}</p>
+        <div class="mt-4 h-1 bg-warm-beige dark:bg-wood-brown/20 rounded-full overflow-hidden">
+          <div class="h-full bg-primary rounded-full" style="width: 75%"></div>
+        </div>
+      </div>
+
+      <div class="card-wood p-6 hover:shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined text-2xl text-primary">folder</span>
+          </div>
+          <div class="flex items-center space-x-1 text-green-600">
+            <span class="text-sm font-medium">+5%</span>
+            <span class="material-symbols-outlined text-sm">trending_up</span>
+          </div>
+        </div>
+        <h3 class="text-soft-brown dark:text-soft-brown/60 text-sm mb-1">Dossiers</h3>
+        <p class="text-3xl font-bold text-wood-brown dark:text-white">{{ stats.totalFolders }}</p>
+        <div class="mt-4 h-1 bg-warm-beige dark:bg-wood-brown/20 rounded-full overflow-hidden">
+          <div class="h-full bg-primary rounded-full" style="width: 60%"></div>
+        </div>
+      </div>
+
+      <div class="card-wood p-6 hover:shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined text-2xl text-primary">insights</span>
+          </div>
+          <div class="flex items-center space-x-1 text-yellow-600">
+            <span class="text-sm font-medium">0%</span>
+            <span class="material-symbols-outlined text-sm">trending_flat</span>
+          </div>
+        </div>
+        <h3 class="text-soft-brown dark:text-soft-brown/60 text-sm mb-1">Activité</h3>
+        <p class="text-3xl font-bold text-wood-brown dark:text-white">{{ stats.recentActivity }}</p>
+        <div class="mt-4 h-1 bg-warm-beige dark:bg-wood-brown/20 rounded-full overflow-hidden">
+          <div class="h-full bg-primary rounded-full" style="width: 45%"></div>
+        </div>
+      </div>
+
+      <div class="card-wood p-6 hover:shadow-lg">
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined text-2xl text-primary">storage</span>
+          </div>
+          <div class="flex items-center space-x-1 text-red-600">
+            <span class="text-sm font-medium">-2%</span>
+            <span class="material-symbols-outlined text-sm">trending_down</span>
+          </div>
+        </div>
+        <h3 class="text-soft-brown dark:text-soft-brown/60 text-sm mb-1">Stockage</h3>
+        <p class="text-3xl font-bold text-wood-brown dark:text-white">{{ getStoragePercentage() }}%</p>
+        <div class="mt-4 h-1 bg-warm-beige dark:bg-wood-brown/20 rounded-full overflow-hidden">
+          <div class="h-full bg-primary rounded-full" [style.width.%]="getStoragePercentage()"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Storage & Activity -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Storage Progress -->
+      <div class="card-wood p-8">
+        <h3 class="text-xl font-semibold text-wood-brown dark:text-white mb-6 flex items-center">
+          <span class="material-symbols-outlined text-2xl mr-3 text-primary">storage</span>
+          Stockage
+        </h3>
+        <div class="space-y-4">
+          <div class="flex justify-between text-soft-brown dark:text-soft-brown/80">
+            <span>{{ (stats.storageUsed / 1024 / 1024).toFixed(2) }} MB utilisés</span>
+            <span>{{ (stats.storageLimit / 1024 / 1024).toFixed(2) }} MB total</span>
+          </div>
+          <div class="w-full bg-warm-beige dark:bg-wood-brown/20 rounded-full h-3 overflow-hidden">
+            <div 
+              class="h-full bg-primary rounded-full transition-all duration-500"
+              [style.width.%]="getStoragePercentage()">
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-4 mt-6">
+            <div class="text-center">
+              <p class="text-2xl font-bold text-primary">{{ stats.totalDocuments }}</p>
+              <p class="text-xs text-soft-brown dark:text-soft-brown/60">Documents</p>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-bold text-primary">{{ stats.totalFolders }}</p>
+              <p class="text-xs text-soft-brown dark:text-soft-brown/60">Dossiers</p>
+            </div>
+            <div class="text-center">
+              <p class="text-2xl font-bold text-primary">{{ getStoragePercentage() }}%</p>
+              <p class="text-xs text-soft-brown dark:text-soft-brown/60">Utilisé</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card-wood p-8">
+        <h3 class="text-xl font-semibold text-wood-brown dark:text-white mb-6 flex items-center">
+          <span class="material-symbols-outlined text-2xl mr-3 text-primary">bolt</span>
+          Actions rapides
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <button class="group p-6 bg-warm-beige/50 dark:bg-wood-brown/10 rounded-xl hover:bg-warm-beige dark:hover:bg-wood-brown/20 transition-all duration-200 hover:scale-105">
+            <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">📝</div>
+            <div class="font-medium text-wood-brown dark:text-white">Créer</div>
+            <div class="text-xs text-soft-brown dark:text-soft-brown/60">Nouveau document</div>
+          </button>
+          
+          <button class="group p-6 bg-warm-beige/50 dark:bg-wood-brown/10 rounded-xl hover:bg-warm-beige dark:hover:bg-wood-brown/20 transition-all duration-200 hover:scale-105">
+            <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">📁</div>
+            <div class="font-medium text-wood-brown dark:text-white">Organiser</div>
+            <div class="text-xs text-soft-brown dark:text-soft-brown/60">Créer dossier</div>
+          </button>
+          
+          <button class="group p-6 bg-warm-beige/50 dark:bg-wood-brown/10 rounded-xl hover:bg-warm-beige dark:hover:bg-wood-brown/20 transition-all duration-200 hover:scale-105">
+            <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">🤖</div>
+            <div class="font-medium text-wood-brown dark:text-white">Analyser</div>
+            <div class="text-xs text-soft-brown dark:text-soft-brown/60">IA intelligente</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card-wood p-8">
+      <h3 class="text-xl font-semibold text-wood-brown dark:text-white mb-6 flex items-center">
+        <span class="material-symbols-outlined text-2xl mr-3 text-primary">history</span>
+        Activité récente
+      </h3>
+      <div class="space-y-4">
+        <div class="flex items-center justify-between p-4 bg-warm-beige/30 dark:bg-wood-brown/5 rounded-xl border border-warm-beige dark:border-wood-brown/20">
+          <div class="flex items-center space-x-4">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary">description</span>
+            </div>
+            <div>
+              <p class="text-wood-brown dark:text-white font-medium">Rapport Annuel 2024</p>
+              <p class="text-soft-brown dark:text-soft-brown/60 text-sm">Modifié il y a 2 heures</p>
+            </div>
+          </div>
+          <div class="text-primary">
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </div>
+        </div>
+        
+        <div class="flex items-center justify-between p-4 bg-warm-beige/30 dark:bg-wood-brown/5 rounded-xl border border-warm-beige dark:border-wood-brown/20">
+          <div class="flex items-center space-x-4">
+            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary">folder</span>
+            </div>
+            <div>
+              <p class="text-wood-brown dark:text-white font-medium">Nouveau dossier "Marketing"</p>
+              <p class="text-soft-brown dark:text-soft-brown/60 text-sm">Créé il y a 5 heures</p>
+            </div>
+          </div>
+          <div class="text-primary">
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

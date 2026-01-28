@@ -1,0 +1,42 @@
+.sidebar {
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-enter {
+  transform: translateX(0);
+}
+
+.sidebar-exit {
+  transform: translateX(-100%);
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+}
+
+.user-avatar {
+  transition: all 0.2s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
+}
+
+.menu-item {
+  transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+  transform: translateX(4px);
+}
+
+.menu-item.active {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-left: 3px solid #3B82F6;
+}
+
+.mobile-overlay {
+  backdrop-filter: blur(2px);
+}
