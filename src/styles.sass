@@ -1,1 +1,164 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Configuration Tailwind personnalisée */
+@layer base {
+  :root {
+    --primary: #eb9947;
+    --accent-yellow: #facc15;
+    --background-light: #fcfaf8;
+    --background-dark: #211911;
+    --warm-beige: #f3ede7;
+    --wood-brown: #1b140e;
+    --soft-brown: #97734e;
+  }
+}
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: #fcfaf8;
+  color: #1b140e;
+  margin: 0;
+  padding: 0;
+}
+
+.dark body {
+  background: #211911;
+  color: #fcfaf8;
+}
+
+/* Material Icons */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Wood texture overlay */
+.wood-texture-overlay {
+  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQmreFk8K-ZhGTXe9m2R4IPEhWMIREL_t1nton00w8Pu5YgMDjuHPywALLouvIidKV5GU5pTJQEh6bhM5rXuRqgzgHY2_lPKp9yvCffdxvRyAiSwzKyXhHw4hP4L5UugZ5jiEzwlrV_u_0p-WVRC0ImMri2Pl7DcU6OX4JXQsg5TlEycw24X638xjhNfG6UAN32CIXO8ycV7bRc9nKm5IGsIAjTxImH1hjad-PBXW_iLfaFSlAmzzde8zxH4R7tFwKSlF-uiJA6V8i");
+  background-blend-mode: overlay;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Custom components */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Button styles */
+.btn-primary {
+  background: #eb9947;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #e68a34;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(235, 153, 71, 0.3);
+}
+
+.btn-secondary {
+  background: #f3ede7;
+  color: #1b140e;
+  border: 1px solid #f3ede7;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #e8dccf;
+  border-color: #e8dccf;
+}
+
+/* Card styles */
+.card-wood {
+  background: white;
+  border: 1px solid #f3ede7;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.card-wood:hover {
+  box-shadow: 0 4px 12px rgba(151, 115, 78, 0.1);
+  transform: translateY(-2px);
+}
+
+.dark .card-wood {
+  background: rgba(33, 25, 17, 0.1);
+  border-color: rgba(243, 237, 231, 0.2);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3ede7;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #211911;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #eb9947;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e68a34;
+}
+
+/* Glassmorphism effects */
+.glass-wood {
+  background: rgba(252, 250, 248, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(243, 237, 231, 0.3);
+}
+
+.dark .glass-wood {
+  background: rgba(33, 25, 17, 0.8);
+  border: 1px solid rgba(151, 115, 78, 0.2);
+}

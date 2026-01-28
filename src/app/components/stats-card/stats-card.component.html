@@ -1,0 +1,23 @@
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-12 h-12 rounded-lg flex items-center justify-center {{ getColorClasses() }}">
+        <span class="text-xl">{{ icon }}</span>
+      </div>
+      <div>
+        <p class="text-sm font-medium text-gray-600">{{ title }}</p>
+        <p class="text-2xl font-bold text-gray-900">{{ value }}</p>
+        @if (subtitle) {
+          <p class="text-xs text-gray-500">{{ subtitle }}</p>
+        }
+      </div>
+    </div>
+    
+    @if (trend) {
+      <div class="flex items-center space-x-1 {{ getTrendColor() }}">
+        <span class="text-lg">{{ getTrendIcon() }}</span>
+        <span class="text-sm font-medium">{{ trend.value }}%</span>
+      </div>
+    }
+  </div>
+</div>

@@ -1,59 +1,187 @@
-# MonProjet
+# DocuWood - Gestion & Génération de Documents Intelligents
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+## 📋 Description
 
-## Development server
+DocuWood est une application Angular moderne de gestion et génération de documents intelligents avec un design élégant inspiré du bois et de la nature. L'application combine la robustesse du bois avec la puissance de l'intelligence artificielle pour offrir une expérience documentaire unique.
 
-To start a local development server, run:
+## 🎨 Design & Thème
 
-```bash
-ng serve
+- **Palette de couleurs** : Thème bois chaleureux avec orange `#eb9947` comme couleur primaire
+- **Font** : Manrope (élégant et moderne)
+- **Icons** : Material Symbols Outlined
+- **Style** : Glassmorphism, backdrop blur, animations fluides
+- **Responsive** : Desktop / Mobile / Tablette
+- **Dark Mode** : Support complet
+
+## 🚀 Fonctionnalités
+
+### ✅ Pages Implémentées
+- **Login** : Connexion avec design bois élégant
+- **Dashboard** : Vue d'ensemble avec statistiques
+- **Documents** : Liste, création, édition, suppression
+- **Dossiers** : Organisation par dossiers
+- **Analyse IA** : Interface d'analyse intelligente
+- **Recherche** : Recherche avancée avec filtres
+- **Profil** : Gestion du profil utilisateur
+
+### 🧩 Composants Réutilisables
+- **DocumentCard** : Affichage des documents
+- **FolderCard** : Affichage des dossiers
+- **SearchBar** : Barre de recherche avec filtres
+- **StatsCard** : Cartes de statistiques
+
+### 🛠️ Architecture
+- **Framework** : Angular 21.1.0 avec Standalone Components
+- **Styling** : Tailwind CSS avec configuration personnalisée
+- **Routing** : Angular Router avec lazy loading
+- **State Management** : Services avec Observables
+- **Mock Data** : Données simulées pour démonstration
+
+## 📁 Structure du Projet
+
+```
+src/app/
+├── core/                    # Services core
+├── shared/
+│   └── layout/             # Layout principal
+├── pages/
+│   ├── auth/               # Authentification
+│   ├── dashboard/          # Tableau de bord
+│   ├── documents/          # Gestion documents
+│   ├── folders/            # Gestion dossiers
+│   ├── analyze/            # Analyse IA
+│   ├── search/             # Recherche
+│   └── profile/            # Profil utilisateur
+├── components/             # Composants réutilisables
+│   ├── document-card/
+│   ├── folder-card/
+│   ├── search-bar/
+│   └── stats-card/
+├── services/
+│   └── mock/               # Services mock
+├── models/                 # Interfaces TypeScript
+└── utils/                  # Utilitaires
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🎯 Démarrage Rapide
 
-## Code scaffolding
+### Prérequis
+- Node.js 24.13.0+
+- Angular CLI 21.1.0+
+- npm ou yarn
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Installation
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+### Démarrage du Serveur
 ```bash
-ng generate --help
+ng serve --port=50892
 ```
 
-## Building
+L'application sera disponible sur : **http://localhost:50892/**
 
-To build the project run:
+### Connexion Demo
+- **Email** : `user@example.com`
+- **Mot de passe** : `password`
 
-```bash
-ng build
+## 🎨 Personnalisation
+
+### Couleurs
+```css
+--primary: #eb9947;          /* Orange bois */
+--accent-yellow: #facc15;    /* Jaune accent */
+--background-light: #fcfaf8; /* Beige clair */
+--background-dark: #211911;   /* Brun foncé */
+--warm-beige: #f3ede7;        /* Beige doux */
+--wood-brown: #1b140e;       /* Brun bois */
+--soft-brown: #97734e;       /* Brun doux */
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Fonts
+- **Manrope** : Police principale (200-800 weight)
+- **Material Symbols Outlined** : Icônes
 
-## Running unit tests
+## 📊 Données Mock
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+L'application utilise des données simulées pour démonstration :
 
+### Documents (5 exemples)
+- Rapport Annuel 2024
+- Plan Marketing Q1
+- Contrat Client ABC
+- Note de Réunion Projet X
+- Documentation Technique API
+
+### Dossiers (4 exemples)
+- Rapports (Bleu)
+- Marketing (Vert)
+- Légal (Rouge)
+- Technique (Orange)
+
+## 🔧 Technologies Utilisées
+
+- **Frontend** : Angular 21.1.0
+- **Styling** : Tailwind CSS
+- **Icons** : Material Symbols
+- **Build** : Angular CLI
+- **Testing** : Vitest
+- **Language** : TypeScript
+
+## 📱 Responsive Design
+
+L'application est entièrement responsive :
+- **Desktop** : Layout complet avec sidebar
+- **Tablette** : Adaptation automatique
+- **Mobile** : Sidebar collapsible, navigation optimisée
+
+## 🌟 Points Forts
+
+1. **Design Unique** : Thème bois élégant et moderne
+2. **Architecture Scalable** : Structure modulaire et maintenable
+3. **Performance** : Lazy loading, optimisations
+4. **UX/UX** : Animations fluides, interactions intuitives
+5. **Code Quality** : TypeScript strict, composants réutilisables
+
+## 🚀 Déploiement
+
+### Build Production
 ```bash
-ng test
+ng build --configuration production
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+### Preview
 ```bash
-ng e2e
+ng serve --configuration production
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📝 Notes de Développement
 
-## Additional Resources
+- Utilisation de Standalone Components (Angular 17+)
+- Services avec Observables pour la gestion des données
+- Mock services pour simulation backend
+- Design system cohérent avec variables CSS
+- Support Dark Mode complet
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🤝 Contribuer
+
+1. Fork le projet
+2. Créer une branche feature
+3. Commit les changements
+4. Push vers la branche
+5. Créer une Pull Request
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.
+
+## 📞 Support
+
+Pour toute question ou support technique :
+- Email : support@docuwood.com
+- Documentation : Voir l'aide intégrée
+
+---
+
+**DocuWood** - La robustesse du bois pour vos documents intelligents 🪵✨

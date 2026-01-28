@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.sass'
+  standalone: true,
+  imports: [],
+  templateUrl: './app.html'
 })
 export class App {
-  protected readonly title = signal('mon-projet');
+  title = 'DocuWood - Développement de Documents Intelligents';
 }
